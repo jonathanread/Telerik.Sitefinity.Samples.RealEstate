@@ -35,7 +35,7 @@
                         <telerik:RadPageView id="pageOverview" runat="server">
                         
 
-                            <telerik:RadListView ID="rlvOverview" runat="server" ItemPlaceholderID="Container" EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false">
+                            <telerik:RadListView ID="rlvOverview" runat="server" ItemPlaceholderID="Container" EnableEmbeddedSkins="false" EnableEmbeddedBaseStylesheet="false" CssClass="overviewTab">
                                 <LayoutTemplate>
                                     <div class="property-carousel">
 				                        <ul>
@@ -248,11 +248,11 @@
         // globals
         var speed = 500,
 		speedFast = Math.round(speed / 2);
-
+        var initialTabStripId = null;
         /*---------------------------------------------------------------------------------- CAROUSELS */
 
 
-        var propertyCarousel = $('#' + initialTabStripId + ' .property-carousel');
+        var propertyCarousel = $('div[class$="pageOverview"] .property-carousel');
         propertyCarousel.jcarousel({
             scroll: 1,
             duration: speedFast,

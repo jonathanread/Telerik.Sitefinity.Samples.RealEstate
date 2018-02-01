@@ -120,17 +120,31 @@ namespace Telerik.StarterKit.Modules.RealEstate.Data
 
                 if (!tagId.Equals(Guid.Empty))
                 {
-                    photos = (
-                                from p in allPhotos.Where(p => (p.GetValue<TrackedList<Guid>>("Category")).Contains(tagId))
-                                select new Photo
-                                {
-                                    Id = p.Id,
-                                    Title = p.Title,
-                                    Description = p.Description,
-                                    Url = string.Format("{0}{1}", librariesManager.GetItemUrl(p), p.Extension)
-                                }
-                              )
-                              .ToList();
+					//photos = (
+					//            from p in allPhotos.Where(p => (p.GetValue<TrackedList<Guid>>("Category")).Contains(tagId))
+					//            select new Photo
+					//            {
+					//                Id = p.Id,
+					//                Title = p.Title,
+					//                Description = p.Description,
+					//                Url = string.Format("{0}{1}", librariesManager.GetItemUrl(p), p.Extension)
+					//            }
+					//          )
+					//          .ToList();
+					var ps = allPhotos.Where(p => (p.GetValue<TrackedList<Guid>>("Category")).Contains(tagId));
+					foreach (var p in ps)
+					{
+						if (photos == null)
+							photos = new List<Photo>();
+
+						photos.Add(new Photo()
+						{
+							Id = p.Id,
+							Title = p.Title,
+							Description = p.Description,
+							Url = string.Format("{0}{1}", librariesManager.GetItemUrl(p), p.Extension)
+						});
+					}
                 }
                 else
                 {
